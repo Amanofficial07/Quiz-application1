@@ -99,6 +99,7 @@ The server should start on http://localhost:3306 by default.
    ![Registration Form](file:///D:/My/Quiz-Application-Using-Java-master/Quiz-Application-Using-Java-master/Main/HTML/registration.html)
 
 ## Project Structure
+```plaintext
 
 OnlineQuizApp/
 ├── gradle/                        # Gradle wrapper files
