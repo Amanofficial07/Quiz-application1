@@ -94,9 +94,9 @@ The server should start on http://localhost:3306 by default.
 
 
 ## Outcome
- ![Login form](file:///D:/My/Quiz-Application-Using-Java-master/Quiz-Application-Using-Java-master/Main/HTML/login.html)
-  ![User profile](file:///D:/My/Quiz-Application-Using-Java-master/Quiz-Application-Using-Java-master/Main/HTML/profile.html)
-   ![Registration Form](file:///D:/My/Quiz-Application-Using-Java-master/Quiz-Application-Using-Java-master/Main/HTML/registration.html)
+ ![Login form](https://github.com/Amanofficial07/Quiz-application1/blob/main/images/login.png)
+  ![User profile](https://github.com/Amanofficial07/Quiz-application1/blob/main/images/profile.png)
+   ![Registration Form](https://github.com/Amanofficial07/Quiz-application1/blob/main/images/Registration.png)
 
 ## Project Structure
 ```plaintext
