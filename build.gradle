@@ -1,0 +1,81 @@
+plugins {
+    id 'java-library'
+    id 'war'
+    id 'eclipse-wtp'
+    id 'com.bmuschko.tomcat' version '2.4.1'
+    id 'org.flywaydb.flyway' version '3.1'
+}
+
+project.webAppDirName = 'WebContent'
+
+repositories {
+    jcenter()
+    mavenCentral()
+}
+
+dependencies {
+    // Database connection (PostgreSQL)
+    compile 'org.postgresql:postgresql:42.2.5'
+
+    // Spring-related dependencies
+    compile 'org.springframework.boot:spring-boot-starter-web'
+    compile 'org.springframework.boot:spring-boot-starter-thymeleaf'
+    compile 'org.springframework.boot:spring-boot-starter-data-jpa'
+
+    // Tomcat Dependencies
+    def tomcatVersion = '9.0.40'
+    tomcat "org.apache.tomcat.embed:tomcat-embed-core:${tomcatVersion}",
+           "org.apache.tomcat.embed:tomcat-embed-logging-juli:${tomcatVersion}",
+           "org.apache.tomcat.embed:tomcat-embed-jasper:${tomcatVersion}"
+
+    // Testing dependencies
+    testImplementation 'org.springframework.boot:spring-boot-starter-test'
+    testImplementation 'junit:junit:4.12'
+    compile 'org.mockito:mockito-all:1.10.19'
+
+    // Guava
+    implementation 'com.google.guava:guava:21.0'
+
+    // Lombok (Optional to reduce boilerplate code)
+    compileOnly 'org.projectlombok:lombok:1.18.22'
+    annotationProcessor 'org.projectlombok:lombok:1.18.22'
+}
+
+flyway {
+    driver = 'org.postgresql.Driver'
+    url = 'jdbc:postgresql://localhost:5432/quizdb'
+    user = 'postgres'
+    password = 'admin'
+    schemas = ['quizdb']
+}
+
+tomcat {
+    enableSSL = true
+    contextPath = '/quiz-app'
+    users {
+        user {
+            username = 'admin'
+            password = 'admin'
+            roles = ['admin']
+        }
+    }
+}
+
+buildscript {
+    repositories {
+        jcenter()
+        mavenCentral()
+    }
+
+    dependencies {
+        classpath 'com.bmuschko:gradle-tomcat-plugin:2.4.1'
+        classpath 'org.flywaydb:flyway-gradle-plugin:3.1'
+    }
+}
+
+task runApp {
+    dependsOn flywayMigrate, tomcatRun
+}
+
+build.dependsOn flywayMigrate
+build.finalizedBy(tomcatRun)
