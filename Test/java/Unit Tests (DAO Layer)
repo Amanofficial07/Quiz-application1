@@ -1,0 +1,38 @@
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
+import static org.junit.jupiter.api.Assertions.*;
+
+class QuizDAOTest {
+    private QuizDAO quizDAO;
+
+    @BeforeEach
+    void setUp() {
+        quizDAO = new QuizDAO();
+    }
+
+    @Test
+    void testGetQuizByIdValid() {
+        // Test fetching a quiz from the database with a valid ID
+        Quiz quiz = quizDAO.getQuizById(1);
+        assertNotNull(quiz);
+        assertEquals(1, quiz.getId());
+        assertEquals("Sample Quiz", quiz.getName());
+    }
+
+    @Test
+    void testGetQuizByIdInvalid() {
+        // Test fetching a quiz with an invalid ID
+        Quiz quiz = quizDAO.getQuizById(-1);
+        assertNull(quiz);
+    }
+
+    @Test
+    void testSaveQuiz() {
+        // Test saving a new quiz
+        Quiz newQuiz = new Quiz(2, "New Quiz");
+        quizDAO.saveQuiz(newQuiz);
+        Quiz result = quizDAO.getQuizById(2);
+        assertNotNull(result);
+        assertEquals("New Quiz", result.getName());
+    }
+}
