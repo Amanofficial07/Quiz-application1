@@ -64,7 +64,7 @@ To set up the project locally:
 bash
 # Start: Clone repository
 git clone https://github.com/
-cd Online
+cd https://github.com/Amanofficial07/Quiz-application1
 # End: Clone repository
 
 ### Install Dependencies
